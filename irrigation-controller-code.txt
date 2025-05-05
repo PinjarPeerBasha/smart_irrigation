@@ -1,0 +1,275 @@
+======================================== working ===========================================
+
+#include <ESP8266WiFi.h>
+#include <PubSubClient.h>
+#include <DHT.h>
+
+// WiFi Settings
+const char* ssid = "ALLASABU Airtel";
+const char* password = "allasabuk";
+
+// MQTT Settings
+const char* mqtt_server = "192.168.1.172"; // Example: "192.168.1.100"
+
+// Sensor Pins
+#define DHTPIN D4      // GPIO2 (you can change)
+#define DHTTYPE DHT11  // <<<<< HERE! Corrected for DHT11
+#define MOISTURE_PIN A0  // Analog pin for soil moisture sensor
+
+DHT dht(DHTPIN, DHTTYPE);
+
+WiFiClient espClient;
+PubSubClient client(espClient);
+
+// Timing
+unsigned long lastMsg = 0;
+const long interval = 20000; // 5 seconds
+
+void setup() {
+  Serial.begin(115200); // Make sure Serial Monitor is also set to 115200
+  delay(2000); // Give the Serial time to start
+
+  Serial.println("\nStarting ESP8266...");
+
+  for (int i = 0; i < 10; i++) {
+    Serial.print("Boot message ");
+    Serial.println(i);
+    delay(500); // wait half a second
+  }
+
+  dht.begin();
+     Serial.println();
+
+  Serial.print("start the wifi ");
+  setup_wifi();
+
+   Serial.println();
+
+    Serial.print("start the mqttt ");
+
+  
+  client.setServer(mqtt_server, 1883);
+}
+
+void setup_wifi() {
+  delay(10);
+  Serial.println();
+  Serial.print("Connecting to ");
+  Serial.println(ssid);
+  
+  WiFi.begin(ssid, password);
+  
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+  
+  Serial.println("");
+  Serial.println("WiFi connected");
+  Serial.println("IP address: ");
+  Serial.println(WiFi.localIP());
+}
+
+void reconnect() {
+  while (!client.connected()) {
+    Serial.print("Attempting MQTT connection...");
+    if (client.connect("ESP8266Client")) {
+      Serial.println("connected");
+    } else {
+      Serial.print("failed, rc=");
+      Serial.print(client.state());
+      Serial.println(" try again in 5 seconds");
+      delay(5000);
+    }
+  }
+}
+
+void loop() {
+  if (!client.connected()) {
+    reconnect();
+  }
+  client.loop();
+  
+  unsigned long now = millis();
+  if (now - lastMsg > interval) {
+    lastMsg = now;
+    
+    float humidity = dht.readHumidity();
+    float temperature = dht.readTemperature();
+
+    int moistureAnalog = analogRead(MOISTURE_PIN);
+    float moisturePercent = map(moistureAnalog, 1023, 0, 0, 100); // 0-100%
+
+    temperature = 12.00;
+
+    // Temperature JSON
+    String tempJson = "{\"sensorId\":\"soil-1\",\"sensorType\":\"temperature\",\"value\":" + String(temperature, 2) +
+                      ",\"unit\":\"C\",\"location\":\"field\",\"batteryLevel\":90.0,\"signalStrength\":-40}";
+    client.publish("irrigation/sensors/temperature-1", (char*) tempJson.c_str());
+    Serial.println("Published temperature");
+
+    // Humidity JSON
+    String humJson = "{\"sensorId\":\"soil-2\",\"sensorType\":\"humidity\",\"value\":" + String(humidity, 2) +
+                     ",\"unit\":\"%\",\"location\":\"field\",\"batteryLevel\":90.0,\"signalStrength\":-40}";
+    client.publish("irrigation/sensors/humidity-1", (char*) humJson.c_str());
+    Serial.println("Published humidity");
+
+    // Soil Moisture JSON
+    String soilJson = "{\"sensorId\":\"soil-3\",\"sensorType\":\"soil_moisture\",\"value\":" + String(moisturePercent, 2) +
+                      ",\"unit\":\"%\",\"location\":\"field\",\"batteryLevel\":90.0,\"signalStrength\":-40}";
+    client.publish("irrigation/sensors/soil-moisture-1", (char*) soilJson.c_str());
+    Serial.println("Published soil moisture");
+  }
+}
+
+
+
+======================================================================================
+
+#include <ESP8266WiFi.h>
+#include <PubSubClient.h>
+#include <DHT.h>
+
+// WiFi Settings
+const char* ssid = "ALLASABU Airtel";
+const char* password = "allasabuk";
+
+// MQTT Settings
+const char* mqtt_server = "192.168.1.172"; // Example: "192.168.1.100"
+
+// Sensor Pins
+#define DHTPIN D4      // GPIO2 (you can change)
+#define DHTTYPE DHT11  // <<<<< HERE! Corrected for DHT11
+#define MOISTURE_PIN A0  // Analog pin for soil moisture sensor
+#define MOTOR_PIN D2    // GPIO4 (Relay control for motor)
+
+DHT dht(DHTPIN, DHTTYPE);
+
+WiFiClient espClient;
+PubSubClient client(espClient);
+
+// Timing
+unsigned long lastMsg = 0;
+const long interval = 60000; // 5 seconds
+
+void setup() {
+  Serial.begin(115200); // Make sure Serial Monitor is also set to 115200
+  delay(2000); // Give the Serial time to start
+
+  Serial.println("\nStarting ESP8266...");
+  
+  // Initialize Motor pin as output
+  pinMode(MOTOR_PIN, OUTPUT);
+  digitalWrite(MOTOR_PIN, LOW); // Motor OFF initially
+
+  for (int i = 0; i < 10; i++) {
+    Serial.print("Boot message ");
+    Serial.println(i);
+    delay(500); // wait half a second
+  }
+
+  dht.begin();
+  Serial.println();
+
+  Serial.print("Start the WiFi ");
+  setup_wifi();
+
+  Serial.println();
+
+  Serial.print("Start the MQTT ");
+  client.setServer(mqtt_server, 1883);
+  client.setCallback(mqttCallback);  // Set the MQTT message callback
+}
+
+void setup_wifi() {
+  delay(10);
+  Serial.println();
+  Serial.print("Connecting to ");
+  Serial.println(ssid);
+  
+  WiFi.begin(ssid, password);
+  
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+  
+  Serial.println("");
+  Serial.println("WiFi connected");
+  Serial.println("IP address: ");
+  Serial.println(WiFi.localIP());
+}
+
+void reconnect() {
+  while (!client.connected()) {
+    Serial.print("Attempting MQTT connection...");
+    if (client.connect("ESP8266Client")) {
+      Serial.println("connected");
+      // Subscribe to a topic to control the motor (e.g., "irrigation/motor")
+      client.subscribe("irrigation/motor");
+    } else {
+      Serial.print("failed, rc=");
+      Serial.print(client.state());
+      Serial.println(" try again in 5 seconds");
+      delay(5000);
+    }
+  }
+}
+
+void mqttCallback(char* topic, byte* payload, unsigned int length) {
+  // Convert the MQTT message payload to a string
+  String message = "";
+  for (unsigned int i = 0; i < length; i++) {
+    message += (char)payload[i];
+  }
+  
+  Serial.print("Message received: ");
+  Serial.println(message);
+  
+  // Check the message and control the motor accordingly
+  if (String(topic) == "irrigation/motor") {
+    if (message == "ON") {
+      digitalWrite(MOTOR_PIN, HIGH);  // Turn ON the motor
+      Serial.println("Motor ON");
+    } else if (message == "OFF") {
+      digitalWrite(MOTOR_PIN, LOW);   // Turn OFF the motor
+      Serial.println("Motor OFF");
+    }
+  }
+}
+
+void loop() {
+  if (!client.connected()) {
+    reconnect();
+  }
+  client.loop();
+  
+  unsigned long now = millis();
+  if (now - lastMsg > interval) {
+    lastMsg = now;
+    
+    float humidity = dht.readHumidity();
+    float temperature = dht.readTemperature();
+
+    int moistureAnalog = analogRead(MOISTURE_PIN);
+    float moisturePercent = map(moistureAnalog, 1023, 0, 0, 100); // 0-100%
+
+    // Temperature JSON
+    String tempJson = "{\"sensorId\":\"soil-1\",\"sensorType\":\"temperature\",\"value\":" + String(temperature, 2) +
+                      ",\"unit\":\"C\",\"location\":\"field\",\"batteryLevel\":90.0,\"signalStrength\":-40}";
+    client.publish("irrigation/sensors/temperature-1", (char*) tempJson.c_str());
+    Serial.println("Published temperature");
+
+    // Humidity JSON
+    String humJson = "{\"sensorId\":\"soil-2\",\"sensorType\":\"humidity\",\"value\":" + String(humidity, 2) +
+                     ",\"unit\":\"%\",\"location\":\"field\",\"batteryLevel\":90.0,\"signalStrength\":-40}";
+    client.publish("irrigation/sensors/humidity-1", (char*) humJson.c_str());
+    Serial.println("Published humidity");
+
+    // Soil Moisture JSON
+    String soilJson = "{\"sensorId\":\"soil-3\",\"sensorType\":\"soil_moisture\",\"value\":" + String(moisturePercent, 2) +
+                      ",\"unit\":\"%\",\"location\":\"field\",\"batteryLevel\":90.0,\"signalStrength\":-40}";
+    client.publish("irrigation/sensors/soil-moisture-1", (char*) soilJson.c_str());
+    Serial.println("Published soil moisture");
+  }
+}
