@@ -1804,3 +1804,7 @@ Caused by: jakarta.mail.internet.AddressException: Local address contains illega
 2025-05-05T23:54:29.434+05:30  INFO 4012 --- [scheduling-1] c.i.b.service.IrrigationScheduleService  : allRunnings : []
 2025-05-05T23:54:29.435+05:30  INFO 4012 --- [scheduling-1] c.i.b.service.IrrigationScheduleService  : Next start : 2025-05-06T21:50
 2025-05-05T23:54:29.435+05:30  INFO 4012 --- [scheduling-1] c.i.b.service.IrrigationScheduleService  : Next start : 2025-05-06T21:57
+2025-05-05T23:55:29.411+05:30  INFO 4012 --- [scheduling-1] c.i.b.service.IrrigationScheduleService  : runIrrigationScheduler called
+2025-05-05T23:55:29.420+05:30  INFO 4012 --- [scheduling-1] c.i.b.service.IrrigationScheduleService  : allRunnings : []
+2025-05-05T23:55:29.421+05:30  INFO 4012 --- [scheduling-1] c.i.b.service.IrrigationScheduleService  : Next start : 2025-05-06T21:50
+2025-05-05T23:55:29.421+05:30  INFO 4012 --- [scheduling-1] c.i.b.service.IrrigationScheduleService  : Next start : 2025-05-06T21:57
