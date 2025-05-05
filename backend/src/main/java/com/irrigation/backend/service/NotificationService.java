@@ -7,6 +7,9 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+import java.util.List;
+
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -18,8 +21,8 @@ public class NotificationService {
     private String fromEmail;
     
     // For a real application, you would store these in a database
-    private final String[] adminEmails = {"peerbashapb044@gmail.com"};
-    
+    private final String[] adminEmails = {"peerbashapb044@gmail.com", "abameer911@gmail.com" ,"beebi9945@gmail.com"};
+
     public void sendNotification(String subject, String message, String severity) {
         // Send email notification
         sendEmail(subject, message);
@@ -37,6 +40,7 @@ public class NotificationService {
             SimpleMailMessage mailMessage = new SimpleMailMessage();
             mailMessage.setFrom(fromEmail);
             mailMessage.setTo(adminEmails);
+            mailMessage.setCc("peerbashapb045@gmail.com");
             mailMessage.setSubject("Smart Irrigation Alert: " + subject);
             mailMessage.setText(message);
             

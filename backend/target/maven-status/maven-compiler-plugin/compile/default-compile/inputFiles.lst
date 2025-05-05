@@ -1,10 +1,13 @@
 C:\Users\peerb\smart-irrigation-system\backend\src\main\java\com\irrigation\backend\model\dtos\Alert.java
 C:\Users\peerb\smart-irrigation-system\backend\src\main\java\com\irrigation\backend\model\entity\SensorDataEntity.java
 C:\Users\peerb\smart-irrigation-system\backend\src\main\java\com\irrigation\backend\model\mapper\IrrigationDeviceMapper.java
+C:\Users\peerb\smart-irrigation-system\backend\src\main\java\com\irrigation\backend\model\dtos\Stats.java
 C:\Users\peerb\smart-irrigation-system\backend\src\main\java\com\irrigation\backend\repository\IrrigationDeviceRepository.java
 C:\Users\peerb\smart-irrigation-system\backend\src\main\java\com\irrigation\backend\service\FarmService.java
+C:\Users\peerb\smart-irrigation-system\backend\src\main\java\com\irrigation\backend\service\StatsService.java
 C:\Users\peerb\smart-irrigation-system\backend\src\main\java\com\irrigation\backend\model\entity\AlertEntity.java
 C:\Users\peerb\smart-irrigation-system\backend\src\main\java\com\irrigation\backend\model\mapper\FarmMapper.java
+C:\Users\peerb\smart-irrigation-system\backend\src\main\java\com\irrigation\backend\service\MqttSenderService.java
 C:\Users\peerb\smart-irrigation-system\backend\src\main\java\com\irrigation\backend\model\dtos\Farm.java
 C:\Users\peerb\smart-irrigation-system\backend\src\main\java\com\irrigation\backend\model\dtos\SensorData.java
 C:\Users\peerb\smart-irrigation-system\backend\src\main\java\com\irrigation\backend\service\SensorDataService.java
@@ -18,6 +21,7 @@ C:\Users\peerb\smart-irrigation-system\backend\src\main\java\com\irrigation\back
 C:\Users\peerb\smart-irrigation-system\backend\src\main\java\com\irrigation\backend\controller\IrrigationScheduleController.java
 C:\Users\peerb\smart-irrigation-system\backend\src\main\java\com\irrigation\backend\service\IrrigationDeviceService.java
 C:\Users\peerb\smart-irrigation-system\backend\src\main\java\com\irrigation\backend\repository\FarmRepository.java
+C:\Users\peerb\smart-irrigation-system\backend\src\main\java\com\irrigation\backend\controller\StatsController.java
 C:\Users\peerb\smart-irrigation-system\backend\src\main\java\com\irrigation\backend\repository\AlertRepository.java
 C:\Users\peerb\smart-irrigation-system\backend\src\main\java\com\irrigation\backend\controller\IrrigationDeviceController.java
 C:\Users\peerb\smart-irrigation-system\backend\src\main\java\com\irrigation\backend\model\mapper\AlertMapper.java

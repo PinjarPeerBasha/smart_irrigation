@@ -1,0 +1,8 @@
+Topic: irrigation/sensors/temperature-1
+{"deviceId":"100","sensorId":"soil-1","sensorType":"temperature","value":40,"unit":"C","location":"field","batteryLevel":90.0,"signalStrength":-40}
+
+Topic: irrigation/sensors/humidity-1
+{"deviceId":"101","sensorId":"soil-2","sensorType":"humidity","value":89,"unit":"%","location":"field","batteryLevel":90.0,"signalStrength":-40}
+
+Topic: irrigation/sensors/soil-moisture-1
+{"deviceId":"102","sensorId":"soil-3","sensorType":"soil_moisture","value":19.00,"unit":"%","location":"field","batteryLevel":90.0,"signalStrength":-40}

@@ -37,7 +37,7 @@ const Sidebar = ({ open, onClose }) => {
     { text: 'Devices', icon: <DevicesIcon />, path: '/devices' },
     { text: 'Schedules', icon: <SchedulesIcon />, path: '/schedules' },
     { text: 'Alerts', icon: <AlertsIcon />, path: '/alerts' },
-    { text: 'Settings', icon: <SettingsIcon />, path: '/settings' },
+
   ];
 
   return (
