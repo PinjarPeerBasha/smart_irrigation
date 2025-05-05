@@ -1780,3 +1780,23 @@ Caused by: jakarta.mail.internet.AddressException: Local address contains illega
 2025-05-05T23:48:29.422+05:30  INFO 4012 --- [scheduling-1] c.i.b.service.IrrigationScheduleService  : allRunnings : []
 2025-05-05T23:48:29.422+05:30  INFO 4012 --- [scheduling-1] c.i.b.service.IrrigationScheduleService  : Next start : 2025-05-06T21:50
 2025-05-05T23:48:29.422+05:30  INFO 4012 --- [scheduling-1] c.i.b.service.IrrigationScheduleService  : Next start : 2025-05-06T21:57
+2025-05-05T23:49:29.409+05:30  INFO 4012 --- [scheduling-1] c.i.b.service.IrrigationScheduleService  : runIrrigationScheduler called
+2025-05-05T23:49:29.419+05:30  INFO 4012 --- [scheduling-1] c.i.b.service.IrrigationScheduleService  : allRunnings : []
+2025-05-05T23:49:29.419+05:30  INFO 4012 --- [scheduling-1] c.i.b.service.IrrigationScheduleService  : Next start : 2025-05-06T21:50
+2025-05-05T23:49:29.419+05:30  INFO 4012 --- [scheduling-1] c.i.b.service.IrrigationScheduleService  : Next start : 2025-05-06T21:57
+2025-05-05T23:50:29.407+05:30  INFO 4012 --- [scheduling-1] c.i.b.service.IrrigationScheduleService  : runIrrigationScheduler called
+2025-05-05T23:50:29.470+05:30  INFO 4012 --- [scheduling-1] c.i.b.service.IrrigationScheduleService  : allRunnings : []
+2025-05-05T23:50:29.471+05:30  INFO 4012 --- [scheduling-1] c.i.b.service.IrrigationScheduleService  : Next start : 2025-05-06T21:50
+2025-05-05T23:50:29.471+05:30  INFO 4012 --- [scheduling-1] c.i.b.service.IrrigationScheduleService  : Next start : 2025-05-06T21:57
+2025-05-05T23:51:29.415+05:30  INFO 4012 --- [scheduling-1] c.i.b.service.IrrigationScheduleService  : runIrrigationScheduler called
+2025-05-05T23:51:29.424+05:30  INFO 4012 --- [scheduling-1] c.i.b.service.IrrigationScheduleService  : allRunnings : []
+2025-05-05T23:51:29.424+05:30  INFO 4012 --- [scheduling-1] c.i.b.service.IrrigationScheduleService  : Next start : 2025-05-06T21:50
+2025-05-05T23:51:29.424+05:30  INFO 4012 --- [scheduling-1] c.i.b.service.IrrigationScheduleService  : Next start : 2025-05-06T21:57
+2025-05-05T23:52:29.420+05:30  INFO 4012 --- [scheduling-1] c.i.b.service.IrrigationScheduleService  : runIrrigationScheduler called
+2025-05-05T23:52:29.428+05:30  INFO 4012 --- [scheduling-1] c.i.b.service.IrrigationScheduleService  : allRunnings : []
+2025-05-05T23:52:29.428+05:30  INFO 4012 --- [scheduling-1] c.i.b.service.IrrigationScheduleService  : Next start : 2025-05-06T21:50
+2025-05-05T23:52:29.429+05:30  INFO 4012 --- [scheduling-1] c.i.b.service.IrrigationScheduleService  : Next start : 2025-05-06T21:57
+2025-05-05T23:53:29.417+05:30  INFO 4012 --- [scheduling-1] c.i.b.service.IrrigationScheduleService  : runIrrigationScheduler called
+2025-05-05T23:53:29.427+05:30  INFO 4012 --- [scheduling-1] c.i.b.service.IrrigationScheduleService  : allRunnings : []
+2025-05-05T23:53:29.428+05:30  INFO 4012 --- [scheduling-1] c.i.b.service.IrrigationScheduleService  : Next start : 2025-05-06T21:50
+2025-05-05T23:53:29.428+05:30  INFO 4012 --- [scheduling-1] c.i.b.service.IrrigationScheduleService  : Next start : 2025-05-06T21:57
