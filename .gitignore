@@ -49,4 +49,5 @@ logs/
 # Compiled output
 dist/
 out/
-build/ 
+build/ node_modules/
+node_modules
