@@ -21,7 +21,7 @@ public class NotificationService {
     private String fromEmail;
     
     // For a real application, you would store these in a database
-    private final String[] adminEmails = {"peerbashapb044@gmail.com", "abameer911@gmail.com" ,"beebi9945@gmail.com"};
+    private final String[] adminEmails = {"peerbashapb044@gmail.com", "abameer911@gmail.com" ,"beebi9945@gmail.com","gpakeerappa2001@gmail.com","pakeerappagulbarga@gmail.com"};
 
     public void sendNotification(String subject, String message, String severity) {
         // Send email notification
